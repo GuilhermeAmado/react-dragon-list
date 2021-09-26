@@ -16,6 +16,9 @@ export const theme = extendTheme({
       700: '#403C34',
     },
   },
+  shadows: {
+    outline: '0 0 0 3px #ECE1CE',
+  },
   styles: {
     global: {
       body: {

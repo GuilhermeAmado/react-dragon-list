@@ -25,7 +25,7 @@ export default function DragonList() {
 
   return (
     <>
-      <Box as="section" mt="8" maxW={{ base: 'xs', md: '3xl' }} mx="auto">
+      <Box as="section" my="8" maxW={{ base: 'xs', md: '3xl' }} mx="auto">
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
           {data.map((dragon: MagicDragon) => {
             return <Dragon key={dragon.id} dragon={dragon} />;

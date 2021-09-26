@@ -6,10 +6,13 @@ import {
   Flex,
   useColorModeValue,
   Text,
+  Badge,
 } from '@chakra-ui/react';
+import parseDate from '../helpers/parseDate';
 
 const Dragon = ({ dragon }) => {
   const { createdAt, name, type, histories, id, avatar } = dragon;
+  // console.log('dragon.createdAt', parseDate(createdAt));
   return (
     <Flex
       direction="column"
@@ -25,12 +28,30 @@ const Dragon = ({ dragon }) => {
         position="absolute"
         inset="0"
         height="20"
-        bg="primary"
+        bgGradient="linear(to-br, primary, brown.700)"
         roundedTop="inherit"
       />
-      <Avatar size="xl" name={name} src={avatar} />
-      <Text marginTop="2">{dragon.name}</Text>
-      <Button marginTop="2">See details</Button>
+      <Avatar
+        size="2xl"
+        name={name}
+        src={avatar}
+        borderWidth={3}
+        borderColor="primary"
+        boxShadow="xl"
+      />
+      <Text marginTop="2" textAlign="center" fontWeight="bold" fontSize="lg">
+        {dragon.name}
+      </Text>
+      <Badge marginTop="2" backgroundColor="yellow.200">
+        Type: {dragon.type}
+      </Badge>
+      <Button my="4">See details</Button>
+      <Text fontSize="10px">
+        <Text as="span" fontWeight="bold">
+          Created at&nbsp;
+        </Text>
+        {parseDate(dragon.createdAt)}
+      </Text>
     </Flex>
   );
 };
