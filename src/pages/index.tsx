@@ -1,9 +1,5 @@
-import { Heading, Text } from '@chakra-ui/layout';
+import Logo from '../components/Logo';
 
 export default function Home() {
-  return (
-    <>
-      <Heading>Dragons lair</Heading>
-    </>
-  );
+  return <Logo />;
 }
