@@ -1,6 +1,10 @@
 import { extendTheme } from '@chakra-ui/react';
 
 export const theme = extendTheme({
+  fonts: {
+    heading: 'Karla',
+    body: 'Karla',
+  },
   styles: {
     global: {
       body: {
