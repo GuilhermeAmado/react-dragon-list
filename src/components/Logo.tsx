@@ -1,13 +1,12 @@
-import { Box, Flex, Heading, Text } from '@chakra-ui/layout';
+import { Icon } from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/layout';
 import { GiSpikedDragonHead } from 'react-icons/gi';
 
 export default function Logo() {
   return (
     <Heading as="h1" maxWidth="fit-content">
       <Flex>
-        <Box as="span" mr="2">
-          <GiSpikedDragonHead />
-        </Box>
+        <Icon as={GiSpikedDragonHead} mr="2" />
         Dragons lair
       </Flex>
     </Heading>
