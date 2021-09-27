@@ -1,6 +1,5 @@
 import { Menu, MenuButton, MenuList, MenuItem, Icon } from '@chakra-ui/react';
-import { GiDragonSpiral } from 'react-icons/gi';
-import { TiEdit, TiDeleteOutline } from 'react-icons/ti';
+import { GiDragonSpiral, GiCrossMark, GiFountainPen } from 'react-icons/gi';
 
 const DropdownMenu = () => {
   return (
@@ -19,10 +18,10 @@ const DropdownMenu = () => {
         borderColor="primary"
       >
         <MenuItem>
-          <Icon mr="2" as={TiEdit} /> Edit
+          <Icon mr="2" as={GiFountainPen} /> Edit
         </MenuItem>
         <MenuItem _hover={{ color: 'red' }}>
-          <Icon mr="2" as={TiDeleteOutline} /> Delete
+          <Icon mr="2" as={GiCrossMark} /> Delete
         </MenuItem>
       </MenuList>
     </Menu>

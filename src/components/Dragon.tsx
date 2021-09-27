@@ -6,6 +6,7 @@ import {
   useColorModeValue,
   Text,
   Badge,
+  Heading,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import parseDate from '../helpers/parseDate';
@@ -42,9 +43,9 @@ const Dragon = ({ dragon }) => {
         borderColor="primary"
         boxShadow="xl"
       />
-      <Text marginTop="2" textAlign="center" fontWeight="bold" fontSize="lg">
+      <Heading marginTop="2" textAlign="center" fontWeight="bold" fontSize="lg">
         {name}
-      </Text>
+      </Heading>
       <Badge marginTop="2" backgroundColor="yellow.200">
         Type: {type}
       </Badge>
