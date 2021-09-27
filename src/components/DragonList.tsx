@@ -3,6 +3,7 @@ import { Box, SimpleGrid } from '@chakra-ui/layout';
 import { useQuery } from 'react-query';
 import Dragon from './Dragon';
 import LoadingIndicator from './LoadingIndicator';
+import sortByName from '../helpers/sortByName';
 
 interface MagicDragon {
   createdAt: string;
@@ -20,6 +21,12 @@ export default function DragonList() {
     )
   );
 
+  let dragonsSortedByName: MagicDragon[] = [];
+
+  if (!isLoading && data[0].name) {
+    dragonsSortedByName = sortByName(data);
+  }
+
   if (isLoading) return <LoadingIndicator />;
 
   if (error) return <h3>An error has occurred</h3>;
@@ -28,7 +35,7 @@ export default function DragonList() {
     <>
       <Box as="section" my="8" maxW={{ base: 'xs', md: '3xl' }} mx="auto">
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
-          {data.map((dragon: MagicDragon) => {
+          {dragonsSortedByName.map((dragon: MagicDragon) => {
             return <Dragon key={dragon.id} dragon={dragon} />;
           })}
         </SimpleGrid>
