@@ -15,7 +15,7 @@ interface MagicDragon {
 
 export default function DragonList() {
   const { isLoading, error, data } = useQuery('repoData', () =>
-    fetch('http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon').then(
+    fetch('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon').then(
       (res) => res.json()
     )
   );
