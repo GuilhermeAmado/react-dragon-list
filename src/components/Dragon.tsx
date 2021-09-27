@@ -1,4 +1,3 @@
-import {} from '@chakra-ui/react';
 import {
   Avatar,
   Box,
@@ -10,10 +9,10 @@ import {
 } from '@chakra-ui/react';
 import parseDate from '../helpers/parseDate';
 import { GiSeaDragon } from 'react-icons/gi';
+import DropdownMenu from './DropdownMenu';
 
 const Dragon = ({ dragon }) => {
   const { createdAt, name, type, histories, id, avatar } = dragon;
-  // console.log('dragon.createdAt', parseDate(createdAt));
   return (
     <Flex
       direction="column"
@@ -55,6 +54,9 @@ const Dragon = ({ dragon }) => {
         </Text>
         {parseDate(dragon.createdAt)}
       </Text>
+      <Box position="absolute" top="20px" right="20px">
+        <DropdownMenu />
+      </Box>
     </Flex>
   );
 };
