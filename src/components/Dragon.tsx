@@ -7,6 +7,7 @@ import {
   Text,
   Badge,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import parseDate from '../helpers/parseDate';
 import { GiSeaDragon } from 'react-icons/gi';
 import DropdownMenu from './DropdownMenu';
@@ -42,17 +43,21 @@ const Dragon = ({ dragon }) => {
         boxShadow="xl"
       />
       <Text marginTop="2" textAlign="center" fontWeight="bold" fontSize="lg">
-        {dragon.name}
+        {name}
       </Text>
       <Badge marginTop="2" backgroundColor="yellow.200">
-        Type: {dragon.type}
+        Type: {type}
       </Badge>
-      <Button my="4">See details</Button>
+      <Link href={`/dragons/${id}`}>
+        <a>
+          <Button my="4">See details</Button>
+        </a>
+      </Link>
       <Text fontSize="10px">
         <Text as="span" fontWeight="bold">
           Created at&nbsp;
         </Text>
-        {parseDate(dragon.createdAt)}
+        {parseDate(createdAt)}
       </Text>
       <Box position="absolute" top="20px" right="20px">
         <DropdownMenu />
