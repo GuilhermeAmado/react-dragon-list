@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/button';
 import { Box, SimpleGrid } from '@chakra-ui/layout';
 import { useQuery } from 'react-query';
 import Dragon from './Dragon';
+import LoadingIndicator from './LoadingIndicator';
 
 interface MagicDragon {
   createdAt: string;
@@ -19,7 +20,7 @@ export default function DragonList() {
     )
   );
 
-  if (isLoading) return <h3>Loading</h3>;
+  if (isLoading) return <LoadingIndicator />;
 
   if (error) return <h3>An error has occurred</h3>;
 
