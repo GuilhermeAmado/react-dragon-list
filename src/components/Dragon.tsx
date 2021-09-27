@@ -9,6 +9,7 @@ import {
   Badge,
 } from '@chakra-ui/react';
 import parseDate from '../helpers/parseDate';
+import { GiSeaDragon } from 'react-icons/gi';
 
 const Dragon = ({ dragon }) => {
   const { createdAt, name, type, histories, id, avatar } = dragon;
@@ -31,9 +32,11 @@ const Dragon = ({ dragon }) => {
         bgGradient="linear(to-br, primary, brown.700)"
         roundedTop="inherit"
       />
+
       <Avatar
         size="2xl"
-        name={name}
+        icon={<GiSeaDragon fontSize="3.5rem" />}
+        bg="yellow.200"
         src={avatar}
         borderWidth={3}
         borderColor="primary"
