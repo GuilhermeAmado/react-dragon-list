@@ -15,12 +15,11 @@ import {
   Input,
   VStack,
 } from '@chakra-ui/react';
-import { useMutation, UseMutationResult, useQuery } from 'react-query';
+import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 
 export default function AddOrEditDragonModal({ isOpen, onOpen, onClose }) {
+  const queryClient = useQueryClient();
   const formRef = useRef();
-
-  const { refetch } = useQuery('dragonsList');
 
   const dragonNameRef = useRef<HTMLInputElement>();
   const dragonTypeRef = useRef<HTMLInputElement>();
@@ -42,7 +41,7 @@ export default function AddOrEditDragonModal({ isOpen, onOpen, onClose }) {
     },
     {
       onSuccess: () => {
-        refetch();
+        queryClient.invalidateQueries('dragonsList');
         onClose();
       },
     }

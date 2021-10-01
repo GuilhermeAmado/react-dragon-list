@@ -1,9 +1,9 @@
 import { Menu, MenuButton, MenuList, MenuItem, Icon } from '@chakra-ui/react';
 import { GiDragonSpiral, GiCrossMark, GiFountainPen } from 'react-icons/gi';
-import { useMutation, UseMutationResult, useQuery } from 'react-query';
+import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 
 const DropdownMenu = ({ dragon }) => {
-  const { refetch } = useQuery('dragonsList');
+  const queryClient = useQueryClient();
 
   const deleteDragon: UseMutationResult = useMutation(
     () => {
@@ -12,7 +12,7 @@ const DropdownMenu = ({ dragon }) => {
         { method: 'DELETE' }
       );
     },
-    { onSuccess: () => refetch() }
+    { onSuccess: () => queryClient.invalidateQueries('dragonsList') }
   );
 
   return (
