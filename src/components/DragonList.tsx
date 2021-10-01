@@ -23,7 +23,7 @@ export default function DragonList() {
 
   let dragonsSortedByName: MagicDragon[] = [];
 
-  if (!isLoading && data[0].name) {
+  if (!isLoading && data && data[0].name) {
     dragonsSortedByName = sortByName(data);
   }
 
