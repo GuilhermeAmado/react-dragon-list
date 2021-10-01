@@ -1,7 +1,20 @@
 import { Menu, MenuButton, MenuList, MenuItem, Icon } from '@chakra-ui/react';
 import { GiDragonSpiral, GiCrossMark, GiFountainPen } from 'react-icons/gi';
+import { useMutation, UseMutationResult, useQuery } from 'react-query';
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ dragon }) => {
+  const { refetch } = useQuery('dragonsList');
+
+  const deleteDragon: UseMutationResult = useMutation(
+    () => {
+      return fetch(
+        `http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${dragon.id}`,
+        { method: 'DELETE' }
+      );
+    },
+    { onSuccess: () => refetch() }
+  );
+
   return (
     <Menu>
       <MenuButton
@@ -20,7 +33,7 @@ const DropdownMenu = () => {
         <MenuItem>
           <Icon mr="2" as={GiFountainPen} /> Edit
         </MenuItem>
-        <MenuItem _hover={{ color: 'red' }}>
+        <MenuItem _hover={{ color: 'red' }} onClick={deleteDragon.mutate}>
           <Icon mr="2" as={GiCrossMark} /> Delete
         </MenuItem>
       </MenuList>

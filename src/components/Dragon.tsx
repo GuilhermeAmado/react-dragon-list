@@ -61,7 +61,7 @@ const Dragon = ({ dragon }) => {
         {parseDate(createdAt)}
       </Text>
       <Box position="absolute" top="20px" right="20px">
-        <DropdownMenu />
+        <DropdownMenu dragon={dragon} />
       </Box>
     </Flex>
   );
