@@ -1,6 +1,6 @@
 import { Button, Icon, useDisclosure } from '@chakra-ui/react';
 import { GiEggEye } from 'react-icons/gi';
-import AddOrEditDragonModal from './AddOrEditDragonModal';
+import DragonModal from './DragonModal';
 
 const AddDragonButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,7 +16,12 @@ const AddDragonButton = () => {
         <Icon as={GiEggEye} mr="2" w={6} h={6} />
         Add a new dragon
       </Button>
-      <AddOrEditDragonModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <DragonModal
+        mode={'ADD'}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      />
     </>
   );
 };
