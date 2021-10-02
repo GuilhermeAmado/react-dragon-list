@@ -13,6 +13,15 @@ import parseDate from '../helpers/parseDate';
 import { GiSeaDragon } from 'react-icons/gi';
 import DropdownMenu from './DropdownMenu';
 
+export interface MagicDragon {
+  createdAt: string;
+  name: string;
+  type: string;
+  histories?: string[];
+  id: string;
+  avatar: string;
+}
+
 const Dragon = ({ dragon }) => {
   const { createdAt, name, type, histories, id, avatar } = dragon;
   return (

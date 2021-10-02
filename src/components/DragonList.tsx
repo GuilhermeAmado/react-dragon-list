@@ -4,15 +4,7 @@ import { useQuery } from 'react-query';
 import Dragon from './Dragon';
 import LoadingIndicator from './LoadingIndicator';
 import sortByName from '../helpers/sortByName';
-
-interface MagicDragon {
-  createdAt: string;
-  name: string;
-  type: string;
-  histories?: string[];
-  id: string;
-  avatar: string;
-}
+import { MagicDragon } from './Dragon';
 
 export default function DragonList() {
   const { isLoading, error, data } = useQuery('dragonsList', () =>
