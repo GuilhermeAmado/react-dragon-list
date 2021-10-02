@@ -1,36 +1,38 @@
-import {
-  Box,
-  Center,
-  Divider,
-  Flex,
-  Img,
-  Stack,
-  Heading,
-  Text,
-} from '@chakra-ui/react';
-import * as React from 'react';
-import { GiReturnArrow } from 'react-icons/gi';
+import { Box, Flex, Img, Stack, Heading, Text } from '@chakra-ui/react';
+import { useQuery } from 'react-query';
 import parseDate from '../helpers/parseDate';
-import { MagicDragon } from './Dragon';
+import LoadingIndicator from './LoadingIndicator';
 
-const DragonDetails = ({ dragon }) => {
-  const { createdAt, name, type, histories, id, avatar } = dragon;
-  console.log(dragon);
+const DragonDetails = ({ dragonID }) => {
+  const { isLoading, error, data } = useQuery('getSingleDragon', () =>
+    fetch(
+      `https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${dragonID}`
+    ).then((res) => res.json())
+  );
+
+  if (isLoading) return <LoadingIndicator />;
+
+  if (!data) return <h1>Dragon Not Found</h1>;
+
+  const { createdAt, name, type, histories, id, avatar } = data;
+
   return (
     <Box as="section" py="12">
       <Box maxW="100%" mx="auto">
         <Flex align="center" direction="column">
           <Box flex="1" pos="relative" maxWidth="100%">
-            <Img
-              w="full"
-              h="full"
-              objectFit="cover"
-              alt=""
-              loading="lazy"
-              rounded="4px"
-              overflow="hidden"
-              src={avatar}
-            />
+            {avatar && (
+              <Img
+                w="full"
+                h="full"
+                objectFit="cover"
+                alt=""
+                loading="lazy"
+                rounded="4px"
+                overflow="hidden"
+                src={avatar}
+              />
+            )}
           </Box>
 
           <Box flex="1" mt={{ base: '8', md: '0' }}>

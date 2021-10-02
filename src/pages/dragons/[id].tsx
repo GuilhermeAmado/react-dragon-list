@@ -17,9 +17,14 @@ export default function DragonPage() {
     ).then((res) => res.json())
   );
 
+  console.log(typeof data);
+  console.log(error);
+
   if (isLoading) return <LoadingIndicator />;
 
   if (error) return <Heading>An error has occurred</Heading>;
+
+  if (typeof data === 'string') return <Heading>{data}</Heading>;
 
   return (
     <Container maxWidth="768px" mx="auto">
@@ -32,10 +37,10 @@ export default function DragonPage() {
         wrap="wrap"
       >
         <Logo />
-        <BackButton onClick={() => router.back()} />
+        <BackButton onClick={() => router.push('/')} />
       </Flex>
       <Flex as="section">
-        <DragonDetails dragon={data} />
+        <DragonDetails dragonID={id} />
       </Flex>
     </Container>
   );
