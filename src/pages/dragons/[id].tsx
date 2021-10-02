@@ -1,30 +1,41 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Container, Flex } from '@chakra-ui/react';
+import { useQuery } from 'react-query';
+import { Container, Flex, Heading } from '@chakra-ui/react';
 import Logo from '../../components/Logo';
 import BackButton from '../../components/BackButton';
+import DragonDetails from '../../components/DragonDetails';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
-export default function DragonDetails({ dragonData }) {
-  const [isPending, setIsPending] = useState(true);
+export default function DragonPage() {
   const router = useRouter();
 
   const { id } = router.query;
 
-  // if (isPending) return <LoadingIndicator />;
+  const { isLoading, error, data } = useQuery('dragonsList', () =>
+    fetch(
+      'https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/' + id
+    ).then((res) => res.json())
+  );
+
+  if (isLoading) return <LoadingIndicator />;
+
+  if (error) return <Heading>An error has occurred</Heading>;
 
   return (
-    <Container maxWidth="100%">
+    <Container maxWidth="768px" mx="auto">
       <Flex
         as="header"
         justifyContent={{ base: 'space-between' }}
         alignItems="center"
         my="5"
-        maxWidth="768px"
         mx="auto"
         wrap="wrap"
       >
         <Logo />
-        <BackButton onClick={() => router.push('/')} />
+        <BackButton onClick={() => router.back()} />
+      </Flex>
+      <Flex as="section">
+        <DragonDetails dragon={data} />
       </Flex>
     </Container>
   );

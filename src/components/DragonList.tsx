@@ -1,5 +1,4 @@
-import { Button } from '@chakra-ui/button';
-import { Box, SimpleGrid } from '@chakra-ui/layout';
+import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import Dragon from './Dragon';
 import LoadingIndicator from './LoadingIndicator';
@@ -13,17 +12,15 @@ export default function DragonList() {
     )
   );
 
-  console.log(data);
-
   let dragonsSortedByName: MagicDragon[] = [];
 
-  if (!isLoading && data && data[0].name) {
+  if (!isLoading && data && data[0]?.name) {
     dragonsSortedByName = sortByName(data);
   }
 
   if (isLoading) return <LoadingIndicator />;
 
-  if (error) return <h3>An error has occurred</h3>;
+  if (error) return <Heading>An error has occurred</Heading>;
 
   return (
     <>
