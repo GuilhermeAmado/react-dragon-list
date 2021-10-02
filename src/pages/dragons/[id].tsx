@@ -1,7 +1,8 @@
-import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import LoadingIndicator from '../../components/LoadingIndicator';
+import { Container, Flex } from '@chakra-ui/react';
+import Logo from '../../components/Logo';
+import BackButton from '../../components/BackButton';
 
 export default function DragonDetails({ dragonData }) {
   const [isPending, setIsPending] = useState(true);
@@ -11,5 +12,20 @@ export default function DragonDetails({ dragonData }) {
 
   // if (isPending) return <LoadingIndicator />;
 
-  return <h1>dragon # {id}</h1>;
+  return (
+    <Container maxWidth="100%">
+      <Flex
+        as="header"
+        justifyContent={{ base: 'space-between' }}
+        alignItems="center"
+        my="5"
+        maxWidth="768px"
+        mx="auto"
+        wrap="wrap"
+      >
+        <Logo />
+        <BackButton onClick={() => router.push('/')} />
+      </Flex>
+    </Container>
+  );
 }
