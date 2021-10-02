@@ -11,21 +11,6 @@ export default function DragonPage() {
 
   const { id } = router.query;
 
-  const { isLoading, error, data } = useQuery('dragonsList', () =>
-    fetch(
-      'https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/' + id
-    ).then((res) => res.json())
-  );
-
-  console.log(typeof data);
-  console.log(error);
-
-  if (isLoading) return <LoadingIndicator />;
-
-  if (error) return <Heading>An error has occurred</Heading>;
-
-  if (typeof data === 'string') return <Heading>{data}</Heading>;
-
   return (
     <Container maxWidth="768px" mx="auto">
       <Flex

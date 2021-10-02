@@ -1,16 +1,21 @@
 import { Box, Flex, Img, Stack, Heading, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
+import { useState } from 'react';
 import parseDate from '../helpers/parseDate';
 import LoadingIndicator from './LoadingIndicator';
 
 const DragonDetails = ({ dragonID }) => {
-  const { isLoading, error, data } = useQuery('getSingleDragon', () =>
-    fetch(
-      `https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${dragonID}`
-    ).then((res) => res.json())
+  const [isPending, setIsPending] = useState(true);
+  const { error, data } = useQuery(
+    `getSingleDragon${dragonID}`,
+    () =>
+      fetch(
+        `https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${dragonID}`
+      ).then((res) => res.json()),
+    { onSuccess: () => setIsPending(false) }
   );
 
-  if (isLoading) return <LoadingIndicator />;
+  if (isPending) return <LoadingIndicator />;
 
   if (!data) return <h1>Dragon Not Found</h1>;
 
