@@ -13,7 +13,12 @@ export default function DragonModal(props: IDragonModal) {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        blockScrollOnMount={true}
+        closeOnOverlayClick={false}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
         <ModalOverlay />
         {mode === 'ADD' && (
           <AddDragonModalContent

@@ -22,7 +22,7 @@ const DragonDetails = ({ dragonID }) => {
   const { createdAt, name, type, histories, id, avatar } = data;
 
   return (
-    <Box as="section" py="12">
+    <Box as="section" mb="8">
       <Box maxW="100%" mx="auto">
         <Flex align="center" direction="column">
           <Box flex="1" pos="relative" maxWidth="100%">
@@ -31,9 +31,9 @@ const DragonDetails = ({ dragonID }) => {
                 w="full"
                 h="full"
                 objectFit="cover"
-                alt=""
+                alt={name}
                 loading="lazy"
-                rounded="4px"
+                rounded="6px"
                 overflow="hidden"
                 src={avatar}
               />

@@ -8,11 +8,8 @@ import {
   Button,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   VStack,
-  useDisclosure,
 } from '@chakra-ui/react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 
@@ -46,7 +43,7 @@ const AddDragonModalContent = ({ isOpen, onOpen, onClose }) => {
   return (
     <ModalContent>
       <ModalHeader>Add a new Dragon</ModalHeader>
-      <ModalCloseButton />
+      <ModalCloseButton disabled={createDragon.isLoading} />
       <form onSubmit={createDragon.mutate}>
         <ModalBody>
           <VStack spacing="3">
@@ -77,10 +74,15 @@ const AddDragonModalContent = ({ isOpen, onOpen, onClose }) => {
             _active={{ backgroundColor: 'brown.900' }}
             mr={3}
             type="submit"
+            disabled={createDragon.isLoading}
           >
             Save Dragon
           </Button>
-          <Button variant="ghost" onClick={onClose}>
+          <Button
+            variant="ghost"
+            onClick={onClose}
+            disabled={createDragon.isLoading}
+          >
             Close
           </Button>
         </ModalFooter>
