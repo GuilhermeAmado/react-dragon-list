@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { setCookie, parseCookies } from 'nookies';
+import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import { recoverUserInfo, signInRequest } from '../services/auth';
 import Router from 'next/router';
 
@@ -17,6 +17,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: User;
   signIn: (data: SignInData) => Promise<void>;
+  signOut: () => Promise<void>;
   isLoading: boolean;
 }
 
@@ -39,6 +40,14 @@ export function AuthProvider({ children }) {
     setIsLoading(false);
   }
 
+  async function signOut() {
+    setIsLoading(true);
+    destroyCookie(undefined, 'dragonsLair.token', {});
+    setUser(null);
+    await Router.push('/');
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     const { 'dragonsLair.token': token } = parseCookies();
 
@@ -48,7 +57,9 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, user, isAuthenticated, isLoading }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, user, isAuthenticated, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,24 +1,28 @@
-import { Container, Flex } from '@chakra-ui/react';
+import { Container, Flex, HStack } from '@chakra-ui/react';
 import AddDragonButton from '../../components/AddDragonButton';
 import DragonList from '../../components/DragonList';
 import Logo from '../../components/Logo';
 import Router from 'next/router';
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
+import LogOutButton from '../../components/LogOutButton';
 
 const DragonsPage = () => {
   return (
     <Container maxWidth="768px" mx="auto">
       <Flex
         as="header"
-        justifyContent={{ base: 'space-between' }}
+        justifyContent={{ base: 'center', md: 'space-between' }}
         alignItems="center"
         my="5"
         mx="auto"
         wrap="wrap"
       >
         <Logo onClick={() => Router.push('/dragons')} />
-        <AddDragonButton />
+        <HStack justifyContent="end" marginLeft={{ base: '0', sm: '4' }}>
+          <AddDragonButton />
+          <LogOutButton />
+        </HStack>
       </Flex>
       <DragonList />
     </Container>
