@@ -1,23 +1,79 @@
+import { useContext } from 'react';
 import Logo from '../components/Logo';
 import DragonList from '../components/DragonList';
-import { Flex, Container } from '@chakra-ui/react';
 import AddDragonButton from '../components/AddDragonButton';
+import { AuthContext } from '../contexts/AuthContext';
+
+import {
+  Box,
+  Button,
+  Heading,
+  SimpleGrid,
+  Text,
+  useColorModeValue,
+  VisuallyHidden,
+  Flex,
+  Tooltip,
+  Tag,
+} from '@chakra-ui/react';
+import * as React from 'react';
+import { LoginForm } from '../components/LoginForm';
 
 export default function Home() {
   return (
-    <Container maxWidth="768px" mx="auto">
-      <Flex
-        as="header"
-        justifyContent={{ base: 'space-between' }}
-        alignItems="center"
-        my="5"
-        mx="auto"
-        wrap="wrap"
-      >
-        <Logo />
-        <AddDragonButton />
-      </Flex>
-      <DragonList />
-    </Container>
+    <Flex
+      bg="yellow.200"
+      minH="100vh"
+      py="6"
+      px={{ base: '4', lg: '8' }}
+      alignItems="center"
+    >
+      <Box maxW="md" mx="auto">
+        <Flex justifyContent="center">
+          <Logo />
+        </Flex>
+        <Heading
+          textAlign="center"
+          size="md"
+          fontWeight="extrabold"
+          marginY="3"
+        >
+          <Tag fontWeight="bold" maxW="md" mx="auto" py="2">
+            <Flex flexWrap="wrap" justifyContent="center">
+              <Text whiteSpace="nowrap" wordBreak="keep-all">
+                You need&nbsp;
+              </Text>
+              <Text
+                as="span"
+                color="primary"
+                textDecoration="underline"
+                _hover={{ cursor: 'pointer' }}
+              >
+                <Tooltip
+                  hasArrow
+                  label="You can use admin:admin but don't tell anyone"
+                  bg="gray.300"
+                  color="black"
+                >
+                  permission
+                </Tooltip>
+              </Text>
+              <Text whiteSpace="nowrap" wordBreak="keep-all">
+                &nbsp;to get close to the dragons
+              </Text>
+            </Flex>
+          </Tag>
+        </Heading>
+        <Box
+          bg="yellow.100"
+          py="8"
+          px={{ base: '4', md: '10' }}
+          shadow="base"
+          rounded={{ sm: 'lg' }}
+        >
+          <LoginForm />
+        </Box>
+      </Box>
+    </Flex>
   );
 }

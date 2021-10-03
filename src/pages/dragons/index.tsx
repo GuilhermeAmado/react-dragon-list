@@ -1,14 +1,15 @@
-import { useRouter } from 'next/router';
 import { Container, Flex } from '@chakra-ui/react';
+import { useContext } from 'react';
+import AddDragonButton from '../../components/AddDragonButton';
+import DragonList from '../../components/DragonList';
 import Logo from '../../components/Logo';
-import BackButton from '../../components/BackButton';
-import DragonDetails from '../../components/DragonDetails';
 import Router from 'next/router';
+import { AuthContext } from '../../contexts/AuthContext';
 
-export default function DragonPage() {
-  const router = useRouter();
+const DragonsPage = () => {
+  const { user } = useContext(AuthContext);
 
-  const { id } = router.query;
+  if (!user) return <h1>You seem lost, friend...</h1>;
 
   return (
     <Container maxWidth="768px" mx="auto">
@@ -21,11 +22,11 @@ export default function DragonPage() {
         wrap="wrap"
       >
         <Logo onClick={() => Router.push('/dragons')} />
-        <BackButton onClick={() => router.push('/dragons')} />
+        <AddDragonButton />
       </Flex>
-      <Flex as="section">
-        <DragonDetails dragonID={id} />
-      </Flex>
+      <DragonList />
     </Container>
   );
-}
+};
+
+export default DragonsPage;

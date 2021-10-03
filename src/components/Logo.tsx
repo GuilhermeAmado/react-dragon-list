@@ -1,16 +1,15 @@
-import { Icon } from '@chakra-ui/react';
+import { Icon, HeadingProps } from '@chakra-ui/react';
 import { Flex, Heading } from '@chakra-ui/layout';
 import { GiSpikedDragonHead } from 'react-icons/gi';
-import { useRouter } from 'next/router';
 
-export default function Logo() {
-  const router = useRouter();
+export default function Logo(props: HeadingProps) {
   return (
     <Heading
       as="h1"
       maxWidth="fit-content"
-      onClick={() => router.push('/')}
+      userSelect="none"
       _hover={{ cursor: 'pointer' }}
+      {...props}
     >
       <Flex>
         <Icon as={GiSpikedDragonHead} mr="2" />
