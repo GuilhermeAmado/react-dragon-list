@@ -3,21 +3,29 @@ import { useQuery } from 'react-query';
 import { useState } from 'react';
 import parseDate from '../helpers/parseDate';
 import LoadingIndicator from './LoadingIndicator';
+import Custom404 from '../pages/404';
 
 const DragonDetails = ({ dragonID }) => {
   const [isPending, setIsPending] = useState(true);
+  const [dragonNotFound, setDragonNotFound] = useState(false);
   const { error, data } = useQuery(
     `getSingleDragon${dragonID}`,
     () =>
       fetch(
         `https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${dragonID}`
-      ).then((res) => res.json()),
+      ).then((res) => {
+        console.log(res.status);
+        if (res.status === 404) setDragonNotFound(true);
+        return res.json();
+      }),
     { onSuccess: () => setIsPending(false) }
   );
 
   if (isPending) return <LoadingIndicator />;
 
-  if (!data) return <h1>Dragon Not Found</h1>;
+  if (!isPending && dragonNotFound) return <Custom404 />;
+
+  console.log(error);
 
   const { createdAt, name, type, histories, id, avatar } = data;
 
