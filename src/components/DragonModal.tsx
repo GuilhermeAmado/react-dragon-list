@@ -1,7 +1,7 @@
 import { Modal, ModalOverlay, UseDisclosureProps } from '@chakra-ui/react';
 import AddDragonModalContent from './AddDragonModalContent';
 import EditDragonModalContent from './EditDragonModalContent';
-import { MagicDragon } from './Dragon';
+import { MagicDragon } from './DragonCard';
 
 interface IDragonModal extends UseDisclosureProps {
   mode?: string;
