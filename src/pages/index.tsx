@@ -51,9 +51,10 @@ export default function Home() {
               >
                 <Tooltip
                   hasArrow
-                  label="You can use admin:admin but don't tell anyone"
-                  bg="gray.300"
+                  label="You can use any information for login, but don't tell anyone"
+                  bg="primary"
                   color="black"
+                  shadow="dark-lg"
                 >
                   permission
                 </Tooltip>

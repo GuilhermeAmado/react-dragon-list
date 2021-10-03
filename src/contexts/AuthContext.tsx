@@ -17,21 +17,26 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: User;
   signIn: (data: SignInData) => Promise<void>;
+  isLoading: boolean;
 }
 
 export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
 
   const isAuthenticated = !!user;
 
   async function signIn({ email, password }: SignInData) {
+    setIsLoading(true);
     const { token, user } = await signInRequest({ email, password });
     setCookie(undefined, 'dragonsLair.token', token, { maxAge: 60 * 60 * 1 });
 
     setUser(user);
-    Router.push('/dragons');
+
+    await Router.push('/dragons');
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -43,7 +48,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, user, isAuthenticated }}>
+    <AuthContext.Provider value={{ signIn, user, isAuthenticated, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

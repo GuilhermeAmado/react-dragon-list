@@ -13,7 +13,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { PasswordField } from './PasswordField';
 
 export const LoginForm = (props: HTMLChakraProps<'form'>) => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, isLoading } = useContext(AuthContext);
   const { handleSubmit } = useForm();
 
   async function handleSignIn(data) {
@@ -40,6 +40,7 @@ export const LoginForm = (props: HTMLChakraProps<'form'>) => {
         </FormControl>
         <PasswordField />
         <Button
+          disabled={isLoading}
           type="submit"
           size="lg"
           fontSize="md"
