@@ -12,6 +12,7 @@ import Link from 'next/link';
 import parseDate from '../helpers/parseDate';
 import { GiSeaDragon } from 'react-icons/gi';
 import DropdownMenu from './DropdownMenu';
+import truncateString from '../helpers/truncateString';
 
 export interface MagicDragon {
   createdAt: string;
@@ -22,7 +23,7 @@ export interface MagicDragon {
   avatar: string;
 }
 
-const Dragon = ({ dragon }) => {
+const DragonCard = ({ dragon }) => {
   const { createdAt, name, type, histories, id, avatar } = dragon;
   return (
     <Flex
@@ -56,7 +57,7 @@ const Dragon = ({ dragon }) => {
         {name}
       </Heading>
       <Badge marginTop="2" backgroundColor="yellow.200">
-        Type: {type}
+        Type: {truncateString(type, 15)}
       </Badge>
       <Link href={`/dragons/${id}`}>
         <a>
@@ -76,4 +77,4 @@ const Dragon = ({ dragon }) => {
   );
 };
 
-export default Dragon;
+export default DragonCard;

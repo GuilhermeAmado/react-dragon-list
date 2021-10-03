@@ -1,9 +1,9 @@
 import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
-import Dragon from './Dragon';
+import DragonCard from './DragonCard';
 import LoadingIndicator from './LoadingIndicator';
 import sortByName from '../helpers/sortByName';
-import { MagicDragon } from './Dragon';
+import { MagicDragon } from './DragonCard';
 
 export default function DragonList() {
   const { isLoading, error, data } = useQuery('dragonsList', () =>
@@ -27,7 +27,7 @@ export default function DragonList() {
       <Box as="section" my="8" maxW={{ base: 'xs', md: '3xl' }} mx="auto">
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
           {dragonsSortedByName.map((dragon: MagicDragon) => {
-            return <Dragon key={dragon.id} dragon={dragon} />;
+            return <DragonCard key={dragon.id} dragon={dragon} />;
           })}
         </SimpleGrid>
       </Box>
