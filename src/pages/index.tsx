@@ -18,6 +18,8 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { LoginForm } from '../components/LoginForm';
+import { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies';
 
 export default function Home() {
   return (
@@ -78,3 +80,20 @@ export default function Home() {
     </Flex>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ['dragonsLair.token']: token } = parseCookies(ctx);
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/dragons',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
