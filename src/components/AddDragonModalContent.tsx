@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
   ModalContent,
   ModalHeader,
@@ -10,10 +10,13 @@ import {
   FormLabel,
   Input,
   VStack,
+  Switch,
 } from '@chakra-ui/react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 
 const AddDragonModalContent = ({ isOpen, onOpen, onClose }) => {
+  const [createRandomDragon, setCreateRandomDragon] = useState(false);
+
   const queryClient = useQueryClient();
   const dragonNameRef = useRef<HTMLInputElement>();
   const dragonTypeRef = useRef<HTMLInputElement>();
@@ -25,9 +28,11 @@ const AddDragonModalContent = ({ isOpen, onOpen, onClose }) => {
         `https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/`,
         {
           method: 'POST',
-          body: JSON.stringify({
-            name: dragonNameRef.current.value,
-            type: dragonTypeRef.current.value,
+          ...(!createRandomDragon && {
+            body: JSON.stringify({
+              name: dragonNameRef.current.value,
+              type: dragonTypeRef.current.value,
+            }),
           }),
           headers: { 'Content-type': 'application/json; charset=UTF-8' },
         }
@@ -47,20 +52,42 @@ const AddDragonModalContent = ({ isOpen, onOpen, onClose }) => {
       <form onSubmit={createDragon.mutate}>
         <ModalBody>
           <VStack spacing="3">
-            <FormControl id="dragon-name" isRequired>
+            <FormControl id="dragon-name" isRequired={!createRandomDragon}>
               <FormLabel>Dragon Name</FormLabel>
               <Input
                 ref={dragonNameRef}
                 type="text"
+                disabled={createRandomDragon}
+                placeholder={createRandomDragon ? 'Random Name' : ''}
                 _focus={{ borderColor: 'primary' }}
+                _disabled={{
+                  backgroundColor: 'gray.100',
+                  cursor: 'not-allowed',
+                }}
               />
             </FormControl>
-            <FormControl id="dragon-type" isRequired>
+            <FormControl id="dragon-type" isRequired={!createRandomDragon}>
               <FormLabel>Dragon Type</FormLabel>
               <Input
                 ref={dragonTypeRef}
                 type="text"
+                disabled={createRandomDragon}
+                placeholder={createRandomDragon ? 'Random Type' : ''}
                 _focus={{ borderColor: 'primary' }}
+                _disabled={{
+                  backgroundColor: 'gray.100',
+                  cursor: 'not-allowed',
+                }}
+              />
+            </FormControl>
+            <FormControl display="flex" alignItems="center">
+              <FormLabel htmlFor="random-dragon" mb="0">
+                Create a Random Dragon
+              </FormLabel>
+              <Switch
+                id="random-dragon"
+                colorScheme="orange"
+                onChange={(e) => setCreateRandomDragon(e.currentTarget.checked)}
               />
             </FormControl>
           </VStack>
