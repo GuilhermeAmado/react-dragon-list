@@ -16,3 +16,24 @@ Design and Code by Guilherme Amado.
 Custom animations by:
 - Deepak K Vijayan (2xsamurai) https://codepen.io/2xsamurai/pen/EKpYMg
 - Jamie Coulter (jcoulterdesign) https://codepen.io/jcoulterdesign/pen/yGgxOY
+
+
+## Run the project locally
+After cloning/downloading the project, install the dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+Run the project:
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+## Or check out the live project
+https://dragons-lair-drab.vercel.app/
+
+```You can use any user/password to login and create a session```
